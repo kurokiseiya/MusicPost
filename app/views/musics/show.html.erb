@@ -1,0 +1,67 @@
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        ミュージック詳細
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-7">
+        <div class="card">
+          <div class="embed-container">
+            <iframe src="https://www.youtube.com/embed/<%=@music.youtube_url%>" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-4"><%= @music.title %></p>
+              </div>
+            </div>
+          </div>
+          <div class="tag-content">
+            <% @music.tags.each do |tag| %>
+              <span class="tag is-light"><%= tag.name %></span>
+            <% end %>
+          </div>
+          <div class="content">
+            <table class="table is-narrow">
+              <tr>
+                <th>詳細</th>
+              </tr>
+              <tr>
+                <td><%= simple_format @music.body %></td>
+              </tr>
+            </table>
+          </div>
+          <% if @music.user.id == current_user.id %>
+            <%= link_to "編集画面へ", edit_music_path(@music), class: "button is-primary" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="column is-4">
+        <article class="panel is-link">
+          <p class="panel-heading">
+            By <%= @music.user.username %>
+          </p>
+          <div class="panel-block">
+            <p class="control">
+              <%= @music.user.profile %>
+            </p>
+          </div>
+          <%= link_to user_path(@music.user), class: "panel-block" do %>
+            <span class="panel-icon">
+              <i class="fas fa-user" aria-hidden="true"></i>
+            </span>
+            <%= @music.user.username %> さんのページへ
+          <% end %>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

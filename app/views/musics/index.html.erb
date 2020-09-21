@@ -1,0 +1,58 @@
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        ミュージック一覧
+      </h1>
+    </div>
+  </div>
+</section>
+
+<%= form_tag musics_path, method: :get, class: 'musics__searchForm' do %>
+  <%= select_tag :tag_id,
+                  options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+                  {
+                    prompt: 'タグで絞り込み',
+                    class: 'form-control musics__select',
+                    onchange: 'submit(this.form);'
+                  }
+  %>
+<% end %>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% @musics.each do |music| %>
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-video"> 
+              <div class="embed-container">
+                <iframe src="https://www.youtube.com/embed/<%=music.youtube_url%>" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <%= attachment_image_tag music.user, :profile_image, fallback: "no-image.png", class: "profile_image" %>
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <div class="title"><%=link_to music.user.username, user_path(music.user) %></div>
+                </div>
+              </div>
+              <div class="content">
+                <time><%= music.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
+              </div>
+              <div class="content-end">
+                <%= link_to music_path(music) do %>
+                  <p>詳細</p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

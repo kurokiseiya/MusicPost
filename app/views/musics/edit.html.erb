@@ -1,0 +1,64 @@
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        ミュージック編集
+      </h1>
+    </div>
+  </div>
+</section>
+
+<% if @music.errors.any? %>
+  <div class="notification is-danger">
+    <h2><%= pluralize(@music.errors.count, "error") %> prohibited this object from being saved: not successfully</h2>
+    <ul>
+      <% @music.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <%= form_for @music do |f| %>
+          <div class="field">
+            <%= f.label :title, "楽曲名", class: "label" %>
+            <%= f.text_field :title, class: "input" %>
+          </div>
+
+           <div class="field">
+            <%= f.label :singer, "楽曲名", class: "label" %>
+            <%= f.text_field :singer, class: "input" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :body, "歌の詳細", class: "label" %>
+            <%= f.text_area :body, class: "textarea" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :youtube_url, "YouTubeのURL", class: "label" %>
+            <%= f.text_field :youtube_url, class: "input" %>
+          </div>
+
+          <div class="form-group">
+            <span>タグ</span>
+            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+              <div class="form-check">
+                <%= tag.label class: 'form-check-label' do %>
+                  <%= tag.check_box class: 'form-check-input' %>
+                  <%= tag.text %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+
+          <%= f.submit '投稿', class: "button is-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

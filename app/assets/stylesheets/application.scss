@@ -1,0 +1,57 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bulma";
+
+.notification:not(:last-child){
+	margin-bottom: 0;
+}
+
+.profile_image {
+ border-radius: 50%;
+}
+
+// youtubeの動画 レスポンシブ //
+.embed-container {
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  padding-bottom: 56.25%; /* 16:9 の高さなので 56.25% (= 9 ÷ 16) */
+  position: relative;
+}
+
+.embed-container iframe {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+// タグコンテンツ //
+.tag-content {
+  text-align: right;
+  margin-right: 20px;
+}
+
+.musics__searchForm {
+  text-align: right;
+  margin: 20px 20px 0 0;
+}
+
+.musics__select {
+  display: inline-block;
+  width: auto;
+}
