@@ -16,3 +16,12 @@
 //= require jquery 
 //= require jquery_ujs
 //= require_tree .
+
+
+
+$(function () {
+  $('.Toggle').click(function () {
+    $(this).toggleClass('active');
+    $('.menu').toggleClass('open');
+  });
+});
