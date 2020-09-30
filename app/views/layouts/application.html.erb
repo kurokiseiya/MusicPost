@@ -8,6 +8,7 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
 
   <body>
@@ -23,66 +24,45 @@
       </div>
     <% end %>
 
-    <nav class="navbar is-primary">
-      <div class="navbar-brand">
-        <%= link_to root_path, class: "navbar-item" do %>
-          <h1 class="title is-4" style="font-family: cursive;">MusicPost</h1>
-        <% end %>
-        <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
+    <header>
+<nav class="navbar is-primary">
+ <div class="drawer">
+ <!--- いわゆるロゴ ------>
+  <div id="logo">
+    <%= link_to root_path, class: "navbar-item" do %>
+      <h1 style="font-family: cursive;">MusicPost</h1>
+    <% end %>
+  </div>
+   <!--- いわゆるロゴ ------>
+ 
+<!-- ハンバーガーメニュー部分 --> 
+<div class="Toggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+  </div>
+ <!-------------- drawer ここまで-->
+ 
+ <div class="menu">
+  <ul>
+    <% if user_signed_in? %>
+      <li class="menu-btn"><%= link_to "ミュージック一覧", musics_path, class: "navbar-item button is-primary is-light" %></li>
+      <li class="menu-btn"><%= link_to "新規投稿", new_music_path, class: "navbar-item button is-primary is-light" %></li>
+      <li class="menu-btn"><%= link_to "ミュージッカー一覧", users_path, class: " button is-primary is-light" %></li>
+      <li class="menu-btn"><%= link_to "マイページ", user_path(current_user), class: " button is-primary is-light" %></li>
+      <li class="menu-btn"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-primary is-light" %></li>
+    <% else %>
+      <li><%= link_to "ミュージック一覧", musics_path, class: "navbar-item button is-primary is-light" %></li>
+      <li><%= link_to "ミュージッカー一覧", users_path, class: " button is-primary is-light" %></li>
+      <li><%= link_to "ログイン", new_user_session_path, class: "button is-primary is-light" %></li>
+      <li><%= link_to "新規登録", new_user_registration_path, class: "button is-primary is-light" %></li>
+    <% end %>
+  </ul>
+ </div>
+</nav>
+</header>
 
-      <% if user_signed_in? %>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
-          <div class="navbar-item">
-            <%= link_to "ミュージック一覧", musics_path, class: "navbar-item button is-primary is-light" %>
-          </div>
-          <div class="navbar-item">
-            <%= link_to "新規投稿", new_music_path, class: "navbar-item button is-primary is-light" %>
-          </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <%= link_to "ミュージッカー一覧", users_path, class: " button is-primary is-light" %>
-                </p>
-                <p class="control">
-                  <%= link_to "マイページ", user_path(current_user), class: " button is-primary is-light" %>
-                </p>
-                <p class="control">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-primary is-light" %>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% else %>
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
-          <div class="navbar-item">
-            <%= link_to "ミュージック一覧", musics_path, class: "navbar-item button is-primary is-light" %>
-          </div>
-          <div class="navbar-item">
-            <%= link_to "ミュージッカー一覧", users_path, class: "navbar-item button is-primary is-light" %>
-          </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <%= link_to "ログイン", new_user_session_path, class: "button is-primary is-light" %>
-                </p>
-                <p class="control">
-                  <%= link_to "新規登録", new_user_registration_path, class: "button is-primary is-light" %>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-
-    </nav>
     <%= yield %>
   </body>
 </html>
