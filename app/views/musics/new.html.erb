@@ -46,14 +46,14 @@
           </div>  
 
           <div class="form-group">
-            <h1>タグ</h1>
+            <span>タグ</span>
             <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
-              <label class="checkbox">
-                <%= tag.label class: 'checkbox' do %>
-                  <%= tag.check_box class: 'checkbox' %>
+              <div class="form-check">
+                <%= tag.label class: 'form-check-label' do %>
+                  <%= tag.check_box class: 'form-check-input' %>
                   <%= tag.text %>
                 <% end %>
-              </label>
+              </div>
             <% end %>
           </div>
 
